@@ -1,0 +1,17 @@
+{
+  "uuid": "2dd2d5cb-331e-4a96-93aa-2075292b0bcf",
+  "shortName": "acctest",
+  "longName": "Accelerometer Test",
+  "companyName": "steveappling",
+  "versionCode": 1,
+  "versionLabel": "1.0.0",
+  "watchapp": {
+    "watchface": false
+  },
+  "appKeys": {
+    "dummy": 0
+  },
+  "resources": {
+    "media": []
+  }
+}
