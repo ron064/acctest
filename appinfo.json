@@ -1,17 +1,20 @@
 {
-  "uuid": "2dd2d5cb-331e-4a96-93aa-2075292b0bcf",
-  "shortName": "acctest",
-  "longName": "Accelerometer Test",
-  "companyName": "steveappling",
-  "versionCode": 1,
-  "versionLabel": "1.0.0",
-  "watchapp": {
-    "watchface": false
-  },
-  "appKeys": {
-    "dummy": 0
-  },
-  "resources": {
-    "media": []
-  }
+    "versionLabel": "1.0.0",
+    "uuid": "2dd2d5cb-331e-4a96-93aa-2075292b0bcf",
+    "appKeys": {
+        "dummy": 0
+    },
+    "longName": "Accelerometer Test",
+    "versionCode": 1,
+    "capabilities": [
+        ""
+    ],
+    "shortName": "acctest",
+    "companyName": "steveappling",
+    "watchapp": {
+        "watchface": false
+    },
+    "resources": {
+        "media": []
+    }
 }
