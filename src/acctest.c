@@ -13,7 +13,6 @@ static TextLayer *text_layer;
 static TextLayer *text_layer_fail;
 static uint16_t acc_count = 0;
 static uint16_t fail_count = 0;
-AccelSamplingRate sample_rate = ACCEL_SAMPLING_100HZ;
 	
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
   text_layer_set_text(text_layer, "Select");
@@ -65,6 +64,17 @@ static void accelHandle(AccelData *data, uint32_t num_samples) {
 	acc_count++;
 }
 
+static void acc_start()
+{
+	accel_data_service_subscribe(25, accelHandle);
+	accel_service_set_sampling_rate(ACCEL_SAMPLING_100HZ);
+}
+
+static void acc_stop()
+{
+	accel_data_service_unsubscribe();
+}
+
 void handle_second_tick(struct tm *tick_time, TimeUnits units_changed)
 {
 	static uint16_t last_count = 0;
@@ -80,25 +90,13 @@ void handle_second_tick(struct tm *tick_time, TimeUnits units_changed)
 	else
 	if (last_count!=0)
 	{
-		accel_data_service_unsubscribe();
+		acc_stop();
 		fail_count++;
 		snprintf(fail_msg, sizeof(fail_msg), "Fails:%u  last at: %u", fail_count, acc_count);
 		text_layer_set_text(text_layer_fail, fail_msg);
 		acc_count = 0; last_count=0;
-		accel_service_set_sampling_rate(sample_rate);
-		accel_data_service_subscribe(25, accelHandle);
+		acc_start();
 	}		
-}
-
-static void acc_start()
-{
-	accel_service_set_sampling_rate(sample_rate);
-	accel_data_service_subscribe(25, accelHandle);
-}
-
-static void acc_stop()
-{
-	accel_data_service_unsubscribe();
 }
 
 static void init(void) {
