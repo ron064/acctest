@@ -71,19 +71,20 @@ void handle_second_tick(struct tm *tick_time, TimeUnits units_changed)
 	static char msg[30];
 	static char fail_msg[30];
 	
-	if (acc_count>=last_count)
+	if (acc_count>last_count)
 	{
 		snprintf(msg, sizeof(msg), "Acc count %u", acc_count);
 		text_layer_set_text(text_layer, msg);
 		last_count = acc_count;
 	}
 	else
+	if (last_count!=0)
 	{
 		accel_data_service_unsubscribe();
 		fail_count++;
 		snprintf(fail_msg, sizeof(fail_msg), "Fails:%u  last at: %u", fail_count, acc_count);
 		text_layer_set_text(text_layer_fail, fail_msg);
-		acc_count = 0;
+		acc_count = 0; last_count=0;
 		accel_service_set_sampling_rate(sample_rate);
 		accel_data_service_subscribe(25, accelHandle);
 	}		
